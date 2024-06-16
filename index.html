@@ -1,8 +1,103 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BotCreate</title>
-  </head>
-  <body>
-    <center><h1>Soon</h1></center>
-  </body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .product {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+        }
+        
+        .product h2 {
+            margin-top: 0;
+        }
+        
+        #cart {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        #cart h2 {
+            margin-top: 0;
+        }
+        
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .cart-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BotCreate</h1>
+    </header>
+
+    <div class="product" id="product1">
+        <h2>Product 1</h2>
+        <p>Dit is product 1. Lorem ipsum dolor sit amet.</p>
+        <button class="add-to-cart">Enable</button>
+    </div>
+
+    <div class="product" id="product2">
+        <h2>Product 2</h2>
+        <p>Dit is product 2. Lorem ipsum dolor sit amet.</p>
+        <button class="add-to-cart">Enable</button>
+    </div>
+
+    <div id="cart">
+        <h2>Enabled modules</h2>
+        <ul id="cart-items">
+            <!-- Hier worden items toegevoegd via JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartItemsList = document.getElementById('cart-items');
+            
+            let addedProducts = {}; // Object om bij te houden welke producten zijn toegevoegd
+        
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = this.parentNode;
+                    const productName = product.querySelector('h2').textContent;
+                    const productId = product.id;
+                    const productDescription = product.querySelector('p').textContent;
+        
+                    if (!addedProducts[productId]) {
+                        const li = document.createElement('li');
+                        li.textContent = `${productName}`;
+                        li.classList.add('cart-item');
+                        cartItemsList.appendChild(li);
+                        addedProducts[productId] = true; // Voeg product toe aan toegevoegde lijst
+                    } else {
+                        alert(`Module "${productName}" al geselecteerd.`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 </html>
